@@ -15,4 +15,5 @@ MQTT_PREFIX=Topic prefix, default to ipmi/{MQTT_HOST}
 
 ## MQTT topics
 * Power state is published to {MQTT_PREFIX}/power_on (retained)
-* Power state can be set via topic {MQTT_PREFIX}/set_power_state
+* Power  can be set via topic {MQTT_PREFIX}/set_power_soft (1/0)
+* Power state can be set via topic {MQTT_PREFIX}/set_power_state (0/1/2/3/4/5)
