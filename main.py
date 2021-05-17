@@ -17,7 +17,6 @@ def on_connect(client, userdata, flags, rc):
 
 def ipmiControl(topic, payload):
     if topic.endswith('set_power_state'):
-        global ipmi
         ipmi.chassis_control(int(payload))
         print('Set power state:', payload)
     elif topic.endswith('set_power_soft'):
@@ -43,7 +42,6 @@ def on_message(client, userdata, message):
 
 
 Connected = False
-ipmi = None
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
@@ -51,7 +49,7 @@ if __name__ == '__main__':
                                                    slave_address=0x81,
                                                    host_target_address=0x20,
                                                    keep_alive_interval=1)
-    global ipmi
+
     ipmi = pyipmi.create_connection(interface)
     ipmi.session.set_session_type_rmcp(host=settings.IPMI_HOST, port=623)
     ipmi.session.set_auth_type_user(username=settings.IPMI_USERNAME, password=settings.IPMI_PASSWORD)
